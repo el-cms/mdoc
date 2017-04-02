@@ -109,13 +109,14 @@ Parser.prototype.parseContent = function(mdown, toc){
         pre = mdown.substring(0, tocIndex),
         post = mdown.substring(tocIndex),
         tocString = this.config.tocString ? this.config.tocString : 'Table of Contents'
-        tocContent = `${this.getHeaderHashes()} ${this.config.tocString} <a href="#toc" name="toc" class="deep-link">#</a>`;
+        tocContent = `${this.getHeaderHashes()} ${this.config.tocString} <a href="#toc" name="toc" class="deep-link">#</a>\n\n`;
 
     toc.forEach(function(val, i){
         tocContent += ' - ['+ val.name +'](#'+ val.href +')\n';
     });
 
-  return this.parseMdown( `${pre}${tocContent}\n${post}` );
+    const tocClass=this.config.tocClass ? this.config.tocClass : 'mdoc-toc';
+    return this.parseMdown( `${pre}<div class="${tocClass}">${this.parseMdown(tocContent)}</div>\n\n${post}` );
 }
 
 

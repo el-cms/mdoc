@@ -95,6 +95,10 @@ is `Filename : WhatIsInbaseTitle`.
 #### Table of content string
 You can replace the "Table of contents" string in outputted HTML with the `tocString` option.
 
+#### Table of content wrapper class
+By default the table of content is wrapped in a div of `mdoc-toc` class. You can override this with the `config.tocClass`
+option.
+
 ### Advanced settings (Optional)
 
 #### Custom Templates
