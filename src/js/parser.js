@@ -32,7 +32,12 @@ Parser.prototype.wrapCode = function(str, p1, p2){
 Parser.prototype.convertCodeBlocks = function(mdown){
     // showdown have issues with github style code blocks..
     var re = /^```\s*(\w+)\s*$([\s\S]*?)^```$/gm;
-    return mdown.replace(re, this.wrapCode);
+    console.log(this.config.parsingFunction);
+    if(!this.config.parsingFunction){
+      console.log('no parsing !');
+      return mdown.replace(re, this.wrapCode);
+    }
+    return mdown
 }
 
 Parser.prototype.normalizeLineBreaks = function(str, lineEnd) {
