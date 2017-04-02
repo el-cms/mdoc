@@ -92,6 +92,9 @@ is `Filename : WhatIsInbaseTitle`.
 
 `baseTitle: 'mdocs title tag'`
 
+#### Table of content string
+You can replace the "Table of contents" string in outputted HTML with the `tocString` option.
+
 ### Advanced settings (Optional)
 
 #### Custom Templates

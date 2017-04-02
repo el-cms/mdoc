@@ -108,7 +108,8 @@ Parser.prototype.parseContent = function(mdown, toc){
     var tocIndex = mdown.search( new RegExp('^'+ this.getHeaderHashes() +'[^#]+', 'm') ), //first header
         pre = mdown.substring(0, tocIndex),
         post = mdown.substring(tocIndex),
-        tocContent = this.getHeaderHashes() +' Table of Contents <a href="#toc" name="toc" class="deep-link">#</a>\n\n';
+        tocString = this.config.tocString ? this.config.tocString : 'Table of Contents'
+        tocContent = `${this.getHeaderHashes()} ${this.config.tocString} <a href="#toc" name="toc" class="deep-link">#</a>\n\n`;
 
     toc.forEach(function(val, i){
         tocContent += ' - ['+ val.name +'](#'+ val.href +')\n';
