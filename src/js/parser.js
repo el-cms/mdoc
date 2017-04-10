@@ -97,10 +97,12 @@ Parser.prototype.parseContent = function(mdown, toc){
     // add deep-links
 
     var i = 0, cur;
+    const deepLinkSymbol = this.config.deepLinkSymbol ? this.config.deepLinkSymbol : '#';
+    const tocString = this.config.tocString ? this.config.tocString : 'Table of Contents'
 
     mdown = mdown.replace(this.getHeaderRegExp(), function(str){
         cur = toc[i++];
-        return str +' <a href="#'+ cur.href +'" id="'+ cur.href +'" class="deep-link">#</a>';
+        return `${str} <a href="#${cur.href}" id="${cur.href}" class="deep-link">${deepLinkSymbol}</a>`;
     });
 
     // generate TOC
@@ -108,8 +110,7 @@ Parser.prototype.parseContent = function(mdown, toc){
     var tocIndex = mdown.search( new RegExp('^'+ this.getHeaderHashes() +'[^#]+', 'm') ), //first header
         pre = mdown.substring(0, tocIndex),
         post = mdown.substring(tocIndex),
-        tocString = this.config.tocString ? this.config.tocString : 'Table of Contents'
-        tocContent = `${this.getHeaderHashes()} ${this.config.tocString} <a href="#toc" name="toc" class="deep-link">#</a>\n\n`;
+        tocContent = `${this.getHeaderHashes()} ${this.config.tocString} <a href="#toc" name="toc" class="deep-link">${deepLinkSymbol}</a>\n\n`;
 
     toc.forEach(function(val, i){
         tocContent += ' - ['+ val.name +'](#'+ val.href +')\n';
